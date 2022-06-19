@@ -2,10 +2,6 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinColumn,
-    JoinTable,
-    ManyToOne,
-    OneToMany,
     PrimaryColumn,
     UpdateDateColumn,
   } from "typeorm";
@@ -49,7 +45,7 @@ import {
   
   
   @Entity("users")
-  export class Bedroom {
+  export class User {
     @PrimaryColumn()
     id: string;
     

@@ -56,7 +56,7 @@ export class CreateBidInItem1654995837105 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('bids_lot')
+        await queryRunner.dropTable('bids_item')
     }
 
 }

@@ -37,9 +37,9 @@ export class CreateItemInLot1654995685929 implements MigrationInterface {
                         type: 'varchar'
                     },
                     {
-                        name: 'win_bid_id',
+                        name: 'win_bid',
                         type: 'varchar',
-                        isNullable: false
+                        isNullable: true
                     },
                     {
                         name: 'user_win_id',
@@ -47,7 +47,7 @@ export class CreateItemInLot1654995685929 implements MigrationInterface {
                         isNullable: true
                     },
                     {
-                        name: 'closed',
+                        name: 'is_active',
                         type: 'integer',
                         default: 0,
                     },

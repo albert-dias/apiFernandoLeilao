@@ -1,4 +1,16 @@
 import { DataSource } from "typeorm";
+import { Auction } from "../entities/Auction";
+import { BidItem } from "../entities/BidItem";
+import { BidLot } from "../entities/BidLot";
+import { Category } from "../entities/Category";
+import { Doc } from "../entities/Doc";
+import { EnableInItem } from "../entities/EnableInItem";
+import { EnableInLot } from "../entities/EnableInLot";
+import { Image } from "../entities/Image";
+import { Item } from "../entities/Item";
+import { Lot } from "../entities/Lot";
+import { Subcategory } from "../entities/Subcategory";
+import { User } from "../entities/User";
 import { CreateUser1654995449661 } from "./migrations/1654995449661-CreateUser";
 import { CreateCategory1654995606760 } from "./migrations/1654995606760-CreateCategory";
 import { CreateSubcategory1654995615800 } from "./migrations/1654995615800-CreateSubcategory";
@@ -18,7 +30,20 @@ const dataSource = new DataSource({
     username: "postgres",
     password: "docker",
     database: "leilaodb",
-    entities: [],
+    entities: [
+        Auction,
+        BidItem,
+        BidLot,
+        Category,
+        Doc,
+        EnableInItem,
+        EnableInLot,
+        Image,
+        Item,
+        Lot,
+        Subcategory,
+        User
+    ],
     migrations: [
         CreateUser1654995449661,
         CreateCategory1654995606760,
