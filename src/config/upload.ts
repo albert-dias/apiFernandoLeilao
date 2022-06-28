@@ -35,7 +35,7 @@ const storgeTypes = {
 export default {
   directory: tmpFolder,
 
-  storage: storgeTypes.s3,
+  storage: storgeTypes.local,
   limits: {
     fileSize: 12 * 1024 * 1024,
   },
@@ -45,6 +45,7 @@ export default {
       "image/pjpeg",
       "image/png",
       "image/gif",
+      "application/pdf"
     ];
 
     if (allowedMimes.includes(file.mimetype)) {

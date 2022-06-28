@@ -12,4 +12,5 @@ const usersController = new UsersController();
 
 export const usersRouter = Router();
 
-usersRouter.post("/", upload.array("photos"), usersController.create)
+usersRouter.post("/", upload.array("documents"), usersController.create);
+usersRouter.get("/", ensureAuthenticate, usersController.show)

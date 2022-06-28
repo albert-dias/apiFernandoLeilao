@@ -12,7 +12,7 @@ export class Doc{
     user_id: string;
 
     @JoinColumn({ name: "user_id" })
-    @ManyToOne(() => User)     
+    @ManyToOne(() => User, user => user.documents)     
     user: User;
                     
     @Column()       

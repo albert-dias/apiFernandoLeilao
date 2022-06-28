@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { Repository } from "typeorm";
 import dataSource from "../database";
 import { User } from "../entities/User";
@@ -126,6 +127,8 @@ class CreateUserService {
             throw new Error("Já existe um usuário cadastrado com esse documento ou e-mail")
         }
 
+        const hashedPassword = await hash(pass, 8);
+
         const user = this.usersRepository.create({
             name, 
             document, 
@@ -144,7 +147,7 @@ class CreateUserService {
             marital_document: maritalDocument, 
             marital_identity: maritalIdentity,
             username: userName, 
-            password: pass, 
+            password: hashedPassword, 
             zipcode, 
             street, 
             number, 

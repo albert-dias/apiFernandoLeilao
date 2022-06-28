@@ -23,7 +23,7 @@ class CreateUploadService {
             throw new Error("Dados incompletos!")
         }
 
-        console.log(documents_url.length, user_id )
+        console.log(documents_url.length )
         
         const userExists = await this.usersRepository.findOne({
             where: {

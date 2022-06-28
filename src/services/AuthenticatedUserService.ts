@@ -19,16 +19,20 @@ class AuthenticateUserService {
   public async execute({ mail, password }: IRequest): Promise<IResponse> {
     const usersRepository = dataSource.getRepository(User);
 
-    const user = await usersRepository.findOne({ where: { mail } });
+    const user = await usersRepository.findOne({ where: { mail} });
 
     if (!user) {
-      throw new Error("Incorrect email/password combination");
+      throw new Error("Combinação email/senha incorretos!");
     }
 
     const passwordMatched = await compare(password, user.password);
 
     if (!passwordMatched) {
-      throw new Error("Incorrect email/password combination");
+      throw new Error("Combinação email/senha incorretos!");
+    }
+
+    if(user.is_active === 0){
+      throw new Error("Conta inativa, aguarde a ativação!");
     }
 
     const { secret, expiresIn } = authConfig.jwt;

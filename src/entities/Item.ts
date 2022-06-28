@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, One
 import { v4 as uuid } from "uuid";
 import { Image } from "./Image";
 import { Lot } from "./Lot";
+import { Subcategory } from "./Subcategory";
 import { User } from "./User";
 
 
@@ -17,12 +18,14 @@ export class Item{
     @ManyToOne(() => Lot)     
     lot: Lot;
 
-    @OneToMany(() => Image, (imageItem) => imageItem.id)
-    @JoinTable({
-      name: "images",
-      joinColumns: [{ name: "image_id" }],
-      inverseJoinColumns: [{ name: "item_id" }],
-    })
+    @Column()       
+    subcategory_id: string;
+
+    @JoinColumn({ name: "subcategory_id" })
+    @ManyToOne(() => Subcategory)     
+    subcategory: Subcategory;
+
+    @OneToMany(() => Image, (imageItem) => imageItem.item)
     images: Image[];
                     
     @Column()       
@@ -38,7 +41,7 @@ export class Item{
     org_avaliation: string;
                                      
     @Column()       
-    inital_bid: string;
+    initial_bid: string;
 
     @Column()       
     win_bid: string;

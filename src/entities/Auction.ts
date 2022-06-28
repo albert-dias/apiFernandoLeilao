@@ -1,11 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Lot } from "./Lot";
 
 
 @Entity('auctions')
 export class Auction{
     @PrimaryColumn()       
     id: string;
+
+    @OneToMany(() => Lot, lot=> lot.auction)
+    lots: Lot[];
                     
     @Column()       
     cod_leilao: string;

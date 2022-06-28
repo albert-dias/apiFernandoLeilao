@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Auction } from "./Auction";
+import { Item } from "./Item";
 import { User } from "./User";
 
 
@@ -15,6 +16,9 @@ export class Lot{
     @JoinColumn({ name: "auction_id" })
     @ManyToOne(() => Auction)     
     auction: Auction;
+
+    @OneToMany(() => Item, item=> item.lot)
+    items: Item[];
                     
     @Column()       
     cod_lot: string;
@@ -38,7 +42,7 @@ export class Lot{
     org_avaliation: string;
 
     @Column()       
-    inital_bid: string;
+    initial_bid: string;
 
     @Column()       
     win_bid: string;

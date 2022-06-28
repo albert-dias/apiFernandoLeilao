@@ -2,10 +2,13 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinTable,
+    OneToMany,
     PrimaryColumn,
     UpdateDateColumn,
   } from "typeorm";
   import { v4 as uuid } from "uuid";
+import { Doc } from "./Doc";
 
 //   @JoinColumn({ name: "cup_id" })
 //     @ManyToOne(() => Cup, { eager: true })
@@ -48,6 +51,9 @@ import {
   export class User {
     @PrimaryColumn()
     id: string;
+
+    @OneToMany(() => Doc, doc=> doc.user)
+    documents: Doc[];
     
     @Column()
     name: string;
