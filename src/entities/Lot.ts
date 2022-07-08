@@ -42,7 +42,10 @@ export class Lot{
     org_avaliation: string;
 
     @Column()       
-    initial_bid: string;
+    initial_bid1: string;
+
+    @Column()       
+    initial_bid2?: string;
 
     @Column()       
     win_bid: string;

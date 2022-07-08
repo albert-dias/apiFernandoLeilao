@@ -1,8 +1,11 @@
+import { Billingconductor } from "aws-sdk";
 import { Request, Response } from "express";
 import AuctionListService from "../services/AuctionListService";
 import AuctionShowService from "../services/AuctionShowService";
+import ItemCreateBidService from "../services/ItemCreateBidService";
 import ItemListService from "../services/ItemListService";
 import ItemShowService from "../services/ItemShowService";
+import LotCreateBidService from "../services/LotCreateBidService copy";
 import LotListService from "../services/LotListService";
 import LotShowService from "../services/LotShowService";
 
@@ -90,11 +93,14 @@ export class AuctionsController {
 
   async bidLot(req: Request, res: Response): Promise<Response> {
     const { id } = req.user;
-    const { lot_id, bid_value } = req.body;
+    const { lot_id, value } = req.body;
     try {
 
+      const bidService = new LotCreateBidService();
 
-      return res.status(201).json(); // retora a conexão
+      const bid = await bidService.execute({ user_id: id, lot_id, value})
+
+      return res.status(201).json({bid}); // retorna a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
@@ -102,11 +108,14 @@ export class AuctionsController {
 
   async bidItem(req: Request, res: Response): Promise<Response> {
     const { id } = req.user;
-    const { lot_id, bid_value } = req.body;
+    const { item_id, value } = req.body;
     try {
 
+      const bidService = new ItemCreateBidService();
 
-      return res.status(201).json(); // retora a conexão
+      const bid = await bidService.execute({ user_id: id, item_id, value})
+
+      return res.status(201).json(bid); // retorna a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

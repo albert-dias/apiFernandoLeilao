@@ -20,7 +20,7 @@ export class EnableInItem{
     @Column()       
     user_id: string;
 
-    @JoinColumn({ name: "lot_id" })
+    @JoinColumn({ name: "user_id" })
     @ManyToOne(() => User)     
     user: User;
                     

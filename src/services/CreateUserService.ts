@@ -89,32 +89,6 @@ class CreateUserService {
             !state ){
             throw new Error("Dados incompletos!")
         }
-
-        console.log(name, 
-            document, 
-            identity, 
-            mail, 
-            phone, 
-            whatsapp, 
-            birth, 
-            job, 
-            marital,
-            naturalness,
-            nationality,
-            fatherName, 
-            motherName, 
-            maritalName, 
-            maritalDocument, 
-            maritalIdentity,
-            userName, 
-            pass, 
-            zipcode, 
-            street, 
-            number, 
-            complement, 
-            region, 
-            city, 
-            state )
         
         const userExists = await this.usersRepository.findOne({
             where: [

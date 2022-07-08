@@ -12,7 +12,8 @@ interface IRequest {
   avaliation: string;
   description: string;
   org_avaliation: string;
-  initial_bid: string;
+  initial_bid1: string;
+  initial_bid2?: string;
   zipcode: string;
   street: string;
   number: string;
@@ -21,6 +22,7 @@ interface IRequest {
   state: string;
   city: string;
   is_active: number;
+  destaq: number
 }
 
 class AdmCreateItemService {
@@ -40,7 +42,8 @@ class AdmCreateItemService {
     avaliation,
     description,
     org_avaliation,
-    initial_bid,
+    initial_bid1,
+    initial_bid2,
     zipcode,
     street,
     number,
@@ -48,23 +51,9 @@ class AdmCreateItemService {
     region,
     state,
     city,
+    destaq,
     subcategory_id
   }: IRequest): Promise<Item> {
-    console.log(user_id,
-      lot_id,
-      cod_item,
-      avaliation,
-      description,
-      org_avaliation,
-      initial_bid,
-      zipcode,
-      street,
-      number,
-      complement,
-      region,
-      state,
-      city,
-      subcategory_id)
 
     if (!user_id ||
       !lot_id ||
@@ -72,7 +61,7 @@ class AdmCreateItemService {
       !cod_item ||
       !avaliation ||
       !description ||
-      !initial_bid ||
+      !initial_bid1 ||
       !zipcode ||
       !street ||
       !number ||
@@ -94,9 +83,11 @@ class AdmCreateItemService {
       throw new Error("Usuário não é administrador!")
     }
 
-    const lotExists = await this.lotsRepository.findOne({where:{
-      id: lot_id
-    }})
+    const lotExists = await this.lotsRepository.findOne({
+      where: {
+        id: lot_id
+      }
+    })
 
     if (!lotExists) {
       throw new Error("Lote não encontrado!")
@@ -109,14 +100,17 @@ class AdmCreateItemService {
       avaliation,
       description,
       org_avaliation,
-      initial_bid,
+      initial_bid1,
+      initial_bid2,
       zipcode,
       street,
       number,
       complement,
       region,
       state,
-      city
+      city,
+      destaq,
+      is_active: "1"
     });
 
     await this.itemsRepository.save(item);

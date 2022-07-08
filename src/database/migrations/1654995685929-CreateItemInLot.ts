@@ -29,6 +29,10 @@ export class CreateItemInLot1654995685929 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'destaq',
+            type: 'varchar',
+          },
+          {
             name: 'description',
             type: 'varchar'
           },
@@ -37,8 +41,13 @@ export class CreateItemInLot1654995685929 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'initial_bid',
+            name: 'initial_bid1',
             type: 'varchar'
+          },
+          {
+            name: 'initial_bid2',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'win_bid',

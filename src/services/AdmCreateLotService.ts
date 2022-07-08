@@ -14,7 +14,8 @@ interface IRequest {
   second_open: Date;
   close: Date;
   org_avaliation: string;
-  initial_bid: string;
+  initial_bid1: string;
+  initial_bid2?: string;
   is_active: number;
 }
 
@@ -38,9 +39,22 @@ class AdmCreateLotService {
     second_open,
     close,
     org_avaliation,
-    initial_bid,
+    initial_bid1,
+    initial_bid2,
     is_active 
   }: IRequest): Promise<Lot> {
+
+    console.log(user_id, 
+      auction_id,
+      cod_lot,
+      description,
+      avaliation,
+      first_open,
+      second_open,
+      close,
+      org_avaliation,
+      initial_bid1,
+      initial_bid2)
 
     if (!user_id || 
       !auction_id || 
@@ -48,7 +62,7 @@ class AdmCreateLotService {
       !first_open ||
       !close ||
       !description ||
-      !initial_bid ) {
+      !initial_bid1 ) {
       throw new Error("Dados incompletos!")
     }
 
@@ -83,7 +97,9 @@ class AdmCreateLotService {
       second_open,
       close,
       org_avaliation,
-      initial_bid,
+      initial_bid1,
+      initial_bid2,
+      is_active: "1"
     });
 
     await this.lotsRepository.save(lot);

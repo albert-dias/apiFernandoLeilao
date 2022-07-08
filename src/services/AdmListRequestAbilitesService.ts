@@ -1,6 +1,5 @@
 import { Repository } from "typeorm";
 import dataSource from "../database";
-import { Auction } from "../entities/Auction";
 import { EnableInItem } from "../entities/EnableInItem";
 import { EnableInLot } from "../entities/EnableInLot";
 
@@ -8,12 +7,12 @@ interface IRequest {
   user_id: string;
 }
 
-interface IResponse{
-  lots: EnableInLot[];
-  items: EnableInItem[];
+interface IResponse {
+  requestInLot: EnableInLot[];
+  requestInItem: EnableInItem[];
 }
 
-class UserCheckAbilitesService {
+class AdmListRequestAbilitesService {
   private enableItemRepository: Repository<EnableInItem>;
   private enableInLotRepository: Repository<EnableInLot>;
 
@@ -21,32 +20,35 @@ class UserCheckAbilitesService {
     this.enableItemRepository = dataSource.getRepository(EnableInItem);
     this.enableInLotRepository = dataSource.getRepository(EnableInLot);
   }
-  public async execute({user_id}: IRequest): Promise<IResponse> {
+  public async execute({ user_id }: IRequest): Promise<IResponse> {
 
-    const lots = await this.enableInLotRepository.find({
+    if (!user_id ) {
+      throw new Error("Dados incompletos na requisição");
+    }
+
+    const requestInLot = await this.enableInLotRepository.find({
       where: {
-        status: '1',
-        user_id,
+        status: "0",
         lot: {
-          is_active: '1'
+          is_active: "1"
         }
       }
     });
 
-
-    const items = await this.enableItemRepository.find({
+    const requestInItem = await this.enableItemRepository.find({
       where: {
-        status: '1',
-        user_id,
+        status: "0",
         item: {
-          is_active: '1'
+          is_active: "1"
         }
       }
-    });
+    })
 
-
-    return {lots, items};
+    return {
+      requestInItem,
+      requestInLot
+    }
   }
 }
 
-export default UserCheckAbilitesService;
+export default AdmListRequestAbilitesService;

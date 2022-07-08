@@ -10,7 +10,7 @@ class ItemListService {
   }
   public async execute(): Promise<Item[]> {
 
-    const items = await this.itemsRepository.find();
+    const items = await this.itemsRepository.find({ relations: ["lot","images"] });
 
     return items;
   }

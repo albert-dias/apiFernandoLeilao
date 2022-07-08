@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import CreateUserService from "../services/CreateUserService";
 import ShowMyUserService from "../services/ShowMyUserService";
 import CreateUploadService from "../services/UploadDocService";
+import UserCheckAbilitesService from "../services/UserCheckAbilitesService";
+import UserRequestAbilitesService from "../services/UserRequestAbilitesService";
 
 interface IFile extends Express.Multer.File {
   key: string;
@@ -56,12 +58,28 @@ export class UsersController {
     }
   }
 
-  async delete(req: Request, res: Response): Promise<Response> {
-    const { } = req.user;
+  async checkAbility(req: Request, res: Response): Promise<Response> {
+    const { id } = req.user;
     try {
+      const abilitiesService = new UserCheckAbilitesService()
 
+      const myAbilities = await abilitiesService.execute( {user_id: id} )
 
-      return res.status(201).json(); // retora a conexão
+      return res.status(201).json(myAbilities); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async createAbility(req: Request, res: Response): Promise<Response> {
+    const { id } = req.user;
+    const { is_type, type_id} = req.body
+    try {
+      const abilitiesService = new UserRequestAbilitesService()
+
+      const myAbilities = await abilitiesService.execute( {user_id: id, type: is_type, id: type_id} )
+
+      return res.status(201).json(myAbilities); // retora a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

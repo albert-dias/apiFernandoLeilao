@@ -4,7 +4,9 @@ import AdmCreateCategoryService from "../services/AdmCreateCategoryService";
 import AdmCreateItemService from "../services/AdmCreateItemService";
 import AdmCreateLotService from "../services/AdmCreateLotService";
 import AdmCreateSubcategoryService from "../services/AdmCreateSubcategoryService";
+import AdmListRequestAbilitesService from "../services/AdmListRequestAbilitesService";
 import AdmLisUsersService from "../services/AdmListUsersService";
+import AdmUpdateRequestAbilitesService from "../services/AdmUpdateRequestAbilitesService";
 import CreateUploadImageService from "../services/UploadImagesService";
 
 interface IFile extends Express.Multer.File {
@@ -103,7 +105,8 @@ export class AdmController {
       second_open,
       close,
       org_avaliation,
-      initial_bid,
+      initial_bid1,
+      initial_bid2,
     } = req.body
 
     try {
@@ -119,7 +122,8 @@ export class AdmController {
         second_open,
         close,
         org_avaliation,
-        initial_bid,
+        initial_bid1,
+        initial_bid2,
         is_active: 1
       })
 
@@ -138,7 +142,8 @@ export class AdmController {
       avaliation,
       description,
       org_avaliation,
-      initial_bid,
+      initial_bid1,
+      initial_bid2,
       zipcode,
       street,
       number,
@@ -146,7 +151,8 @@ export class AdmController {
       region,
       state,
       city,
-      subcategory_id
+      subcategory_id,
+      destaq,
     } = req.body
 
     const images = req.files as [];
@@ -166,7 +172,8 @@ export class AdmController {
         avaliation,
         description,
         org_avaliation,
-        initial_bid,
+        initial_bid1,
+        initial_bid2,
         zipcode,
         street,
         number,
@@ -174,12 +181,40 @@ export class AdmController {
         region,
         state,
         city,
+        destaq,
         is_active: 1
       });
 
-      const images = await imageService.execute({ images_url, item_id: item.id, user_id: id})
+      const images = await imageService.execute({ images_url, item_id: item.id, user_id: id })
 
-      return res.status(201).json({item, images}); // retora a conexão
+      return res.status(201).json({ item, images }); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listRequestAbility(req: Request, res: Response): Promise<Response> {
+    const { id } = req.user;
+    try {
+      const listService = new AdmListRequestAbilitesService();
+
+      const list = await listService.execute({ user_id: id });
+
+      return res.status(201).json(list); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async updateRequestAbility(req: Request, res: Response): Promise<Response> {
+    const user_id = req.user.id;
+    const { type, id } = req.body;
+    try {
+      const abilityService = new AdmUpdateRequestAbilitesService();
+
+      const ability = await abilityService.execute({ user_id, type, id });
+
+      return res.status(201).json(ability); // retora a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
