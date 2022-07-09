@@ -27,6 +27,7 @@ import { CreateEnableUserInItem1654996074738 } from "./migrations/1654996074738-
 const dataSource = new DataSource({
     type: "postgres",
     port:35432,
+    host:"localhost",
     username: process.env.DB_USER,
     password: `${process.env.DB_PASS}`,
     database: process.env.DB_NAME,
