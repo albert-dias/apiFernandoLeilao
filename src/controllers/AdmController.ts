@@ -156,6 +156,8 @@ export class AdmController {
     } = req.body
 
     const images = req.files as [];
+
+    console.log(images)
     const images_url = images.map((document: IFile) => {
       return document.location;
     });
