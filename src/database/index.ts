@@ -26,10 +26,10 @@ import { CreateEnableUserInItem1654996074738 } from "./migrations/1654996074738-
 
 const dataSource = new DataSource({
     type: "postgres",
-    port: 5432,
-    username: "postgres",
-    password: "docker",
-    database: "leilaodb",
+    port: Number(process.env.DB_PORT),
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     entities: [
         Auction,
         BidItem,
