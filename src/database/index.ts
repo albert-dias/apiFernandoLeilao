@@ -28,7 +28,7 @@ const dataSource = new DataSource({
     type: "postgres",
     port:35432,
     username: process.env.DB_USER,
-    password: process.env.DB_PASS,
+    password: `${process.env.DB_PASS}`,
     database: process.env.DB_NAME,
     entities: [
         Auction,
