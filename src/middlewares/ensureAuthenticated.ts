@@ -9,6 +9,7 @@ interface ITokenPayload {
   sub: string;
   name: string;
   mail: string;
+  username: string;
 }
 
 export default function ensureAuthenticate(
@@ -27,12 +28,13 @@ export default function ensureAuthenticate(
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub, name, mail } = decoded as ITokenPayload;
+    const { sub, name, mail, username } = decoded as ITokenPayload;
 
     req.user = {
       id: sub,
       name,
       mail,
+      username
     };
 
     return next();
