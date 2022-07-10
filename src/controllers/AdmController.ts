@@ -6,6 +6,7 @@ import AdmCreateLotService from "../services/AdmCreateLotService";
 import AdmCreateSubcategoryService from "../services/AdmCreateSubcategoryService";
 import AdmListRequestAbilitesService from "../services/AdmListRequestAbilitesService";
 import AdmLisUsersService from "../services/AdmListUsersService";
+import AdmShowUserService from "../services/AdmShowUserService";
 import AdmUpdateRequestAbilitesService from "../services/AdmUpdateRequestAbilitesService";
 import CreateUploadImageService from "../services/UploadImagesService";
 
@@ -22,6 +23,22 @@ export class AdmController {
       const userService = new AdmLisUsersService();
 
       const user = await userService.execute({ user_id: id })
+
+      return res.status(200).json(user); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async showUser(req: Request, res: Response): Promise<Response> {
+
+    const user_id  = req.user.id;
+    const { id } = req.params;
+    
+    try {
+      const userService = new AdmShowUserService();
+
+      const user = await userService.execute({ user_id, id})
 
       return res.status(200).json(user); // retora a conexão
     } catch (error) {
