@@ -12,26 +12,23 @@ class AdmLisUsersService {
   constructor() {
     this.usersRepository = dataSource.getRepository(User);
   }
-  public async execute({ user_id }: IRequest): Promise<User> {
+  public async execute({ user_id }: IRequest): Promise<User[]> {
 
     if (!user_id) {
       throw new Error("Dados incompletos!")
     }
 
-    const user = await this.usersRepository.findOne({
-      where: {
-        id: user_id
-      },
-      relations:['documents']
-    });
+    const users = await this.usersRepository.find();
 
-    if(!user){
+    if(!users){
       throw new Error("Usuário não existe!")
     }
 
-    delete user.password;
+    users.map(user => {
+      delete user.password;
+    })
 
-    return user;
+    return users;
   }
 }
 
