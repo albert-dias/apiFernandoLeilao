@@ -34,7 +34,7 @@ export class AdmController {
 
     const user_id  = req.user.id;
     const { id } = req.params;
-    
+
     try {
       const userService = new AdmShowUserService();
 
@@ -89,7 +89,7 @@ export class AdmController {
 
     const { id } = req.user
     const { cod_leilao, type_auction, data_realizacao, description } = req.body
-    const edital = req.file;
+    const edital = req.file as IFile;
 
     try {
       const auctionService = new AdmCreateAuctionService();
@@ -98,7 +98,7 @@ export class AdmController {
         user_id: id,
         cod_leilao,
         type_auction,
-        url_edital: edital.destination,
+        url_edital: edital.location,
         data_realizacao,
         description,
         is_active: 1
