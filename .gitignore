@@ -1,3 +1,5 @@
 node_modules
 tmp
 .env
+
+./src/database/index.ts
