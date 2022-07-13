@@ -8,6 +8,7 @@ import ItemShowService from "../services/ItemShowService";
 import LotCreateBidService from "../services/LotCreateBidService copy";
 import LotListService from "../services/LotListService";
 import LotShowService from "../services/LotShowService";
+import SubcategoryListService from "../services/SubCategoryListService";
 
 interface IFile extends Express.Multer.File {
   key: string;
@@ -46,6 +47,18 @@ export class AuctionsController {
       const items = await itemService.execute()
 
       return res.status(200).json(items); 
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listSubcategories(req: Request, res: Response): Promise<Response> {
+    try {
+      const subcategoryService = new SubcategoryListService();
+
+      const subcategories = await subcategoryService.execute()
+
+      return res.status(200).json(subcategories); 
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
