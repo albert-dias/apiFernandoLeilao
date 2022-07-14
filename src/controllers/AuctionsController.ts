@@ -2,10 +2,11 @@ import { Billingconductor } from "aws-sdk";
 import { Request, Response } from "express";
 import AuctionListService from "../services/AuctionListService";
 import AuctionShowService from "../services/AuctionShowService";
+import CategoryListService from "../services/CategoryListService";
 import ItemCreateBidService from "../services/ItemCreateBidService";
 import ItemListService from "../services/ItemListService";
 import ItemShowService from "../services/ItemShowService";
-import LotCreateBidService from "../services/LotCreateBidService copy";
+import LotCreateBidService from "../services/LotCreateBidService";
 import LotListService from "../services/LotListService";
 import LotShowService from "../services/LotShowService";
 import SubcategoryListService from "../services/SubCategoryListService";
@@ -59,6 +60,18 @@ export class AuctionsController {
       const subcategories = await subcategoryService.execute()
 
       return res.status(200).json(subcategories); 
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listCategories(req: Request, res: Response): Promise<Response> {
+    try {
+      const categoryService = new CategoryListService();
+
+      const categories = await categoryService.execute()
+
+      return res.status(200).json(categories); 
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

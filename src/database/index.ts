@@ -11,6 +11,8 @@ import { Item } from "../entities/Item";
 import { Lot } from "../entities/Lot";
 import { Subcategory } from "../entities/Subcategory";
 import { User } from "../entities/User";
+import { VisibleItem } from "../entities/VisibleItem";
+import { VisibleLot } from "../entities/VisibleLot";
 import { CreateUser1654995449661 } from "./migrations/1654995449661-CreateUser";
 import { CreateCategory1654995606760 } from "./migrations/1654995606760-CreateCategory";
 import { CreateSubcategory1654995615800 } from "./migrations/1654995615800-CreateSubcategory";
@@ -23,6 +25,8 @@ import { CreateBidInLot1654995828414 } from "./migrations/1654995828414-CreateBi
 import { CreateBidInItem1654995837105 } from "./migrations/1654995837105-CreateBidInItem";
 import { CreateEnableUserInLot1654996060559 } from "./migrations/1654996060559-CreateEnableUserInLot";
 import { CreateEnableUserInItem1654996074738 } from "./migrations/1654996074738-CreateEnableUserInItem";
+import { CreateVisibleLot1657761989037 } from "./migrations/1657761989037-CreateVisibleLot";
+import { CreateVisibleItem1657762036013 } from "./migrations/1657762036013-CreateVisibleItem";
 
 const dataSource = new DataSource({
     type: "postgres",
@@ -42,7 +46,9 @@ const dataSource = new DataSource({
         Item,
         Lot,
         Subcategory,
-        User
+        User,
+        VisibleLot,
+        VisibleItem
     ],
     migrations: [
         CreateUser1654995449661,
@@ -57,6 +63,8 @@ const dataSource = new DataSource({
         CreateBidInItem1654995837105,
         CreateEnableUserInLot1654996060559,
         CreateEnableUserInItem1654996074738,
+        CreateVisibleLot1657761989037,
+        CreateVisibleItem1657762036013,
     ],
 });
 

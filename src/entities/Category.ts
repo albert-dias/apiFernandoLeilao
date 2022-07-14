@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Subcategory } from "./Subcategory";
 
 @Entity('categories')
 export class Category{
@@ -8,6 +9,9 @@ export class Category{
                     
     @Column()       
     description: string;
+
+    @OneToMany(() => Subcategory, (subcategory) => subcategory.category)
+    subcategories: Subcategory[];
   
     @CreateDateColumn()
     created_at: Date;

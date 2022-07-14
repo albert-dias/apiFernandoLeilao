@@ -13,6 +13,7 @@ export const auctionRouter = Router();
 
 auctionRouter.get("/", auctionController.listAuctions);
 auctionRouter.get("/subcategories", auctionController.listSubcategories);
+auctionRouter.get("/categories", auctionController.listCategories);
 auctionRouter.get("/lots", auctionController.listLots);
 auctionRouter.get("/items", auctionController.listItems);
 auctionRouter.get("/:id", auctionController.showAuction);
