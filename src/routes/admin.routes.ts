@@ -12,6 +12,7 @@ export const admRouter = Router();
 
 admRouter.get("/users", adminController.listUsers);
 admRouter.get("/user/:id", adminController.showUser);
+admRouter.get("/bids", adminController.listBidsItem);
 admRouter.post("/auctions", upload.single("edital"), adminController.createAuction);
 admRouter.post("/lots", adminController.createLot);
 admRouter.post("/items", upload.array("images"), adminController.createItems);

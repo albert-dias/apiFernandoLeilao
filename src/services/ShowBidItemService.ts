@@ -36,7 +36,7 @@ class ShowBidItemService {
     });
 
     if(!bid){
-      throw new Error("Usuário não existe!")
+      throw new Error("Não existem lances!")
     }
 
     return {

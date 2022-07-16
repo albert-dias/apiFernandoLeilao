@@ -8,6 +8,7 @@ import AdmListRequestAbilitesService from "../services/AdmListRequestAbilitesSer
 import AdmLisUsersService from "../services/AdmListUsersService";
 import AdmShowUserService from "../services/AdmShowUserService";
 import AdmUpdateRequestAbilitesService from "../services/AdmUpdateRequestAbilitesService";
+import ListBidsItemService from "../services/ListBidsItemService";
 import CreateUploadImageService from "../services/UploadImagesService";
 
 interface IFile extends Express.Multer.File {
@@ -234,6 +235,18 @@ export class AdmController {
       const ability = await abilityService.execute({ user_id, type, id });
 
       return res.status(201).json(ability); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listBidsItem(req: Request, res: Response): Promise<Response> {
+    try {
+      const listService = new ListBidsItemService();
+
+      const list = await listService.execute();
+
+      return res.status(201).json(list); // retora a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
