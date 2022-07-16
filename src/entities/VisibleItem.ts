@@ -15,13 +15,6 @@ export class VisibleItem{
     @JoinColumn({ name: "item_id" })
     @ManyToOne(() => Item)     
     item: Item;
-
-    @Column()       
-    user_id: string;
-
-    @JoinColumn({ name: "user_id" })
-    @ManyToOne(() => User)     
-    user: User;
   
     @CreateDateColumn()
     created_at: Date;

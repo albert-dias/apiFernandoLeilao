@@ -15,13 +15,6 @@ export class VisibleLot{
     @JoinColumn({ name: "lot_id" })
     @ManyToOne(() => Lot)     
     lot: Lot;
-
-    @Column()       
-    user_id: string;
-
-    @JoinColumn({ name: "user_id" })
-    @ManyToOne(() => User)     
-    user: User;
                     
     @CreateDateColumn()
     created_at: Date;

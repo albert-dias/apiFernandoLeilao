@@ -17,23 +17,12 @@ export class CreateVisibleLot1657761989037 implements MigrationInterface {
             type: 'uuid'
           },
           {
-            name: 'user_id',
-            type: 'uuid'
-          },
-          {
             name: "created_at",
             type: "timestamp",
             default: "now()",
           },
         ],
         foreignKeys: [
-          {
-            name: "FKUser_BidsLots",
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            columnNames: ["user_id"],
-            onDelete: "CASCADE",
-          },
           {
             name: "FKLot_BidsLots",
             referencedTableName: "lots",

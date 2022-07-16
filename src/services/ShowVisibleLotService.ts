@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import dataSource from "../database";
-import { BidItem } from "../entities/BidItem";
+import { VisibleLot } from "../entities/VisibleLot";
 
 
 interface IRequest {
@@ -10,14 +10,13 @@ interface IRequest {
 interface IResposnse {
   id: string;
   quantity:number;
-  bid: BidItem[]
 }
 
-class ShowBidItemService {
-  private bidItemsRepository: Repository<BidItem>;
+class ShowVisibleLotService {
+  private visibleItemsRepository: Repository<VisibleLot>;
 
   constructor() {
-    this.bidItemsRepository = dataSource.getRepository(BidItem);
+    this.visibleItemsRepository = dataSource.getRepository(VisibleLot);
   }
   public async execute({ id }: IRequest): Promise<IResposnse> {
 
@@ -25,26 +24,21 @@ class ShowBidItemService {
       throw new Error("Dados incompletos!")
     }
 
-    const bid = await this.bidItemsRepository.find({
+    const visible = await this.visibleItemsRepository.find({
       where: {
-        item_id: id
+        lot_id: id
       },
-      relations:['user'],
-      order: {
-        created_at: "DESC"
-      }
     });
 
-    if(!bid){
+    if(!visible){
       throw new Error("Usuário não existe!")
     }
 
     return {
       id,
-      quantity: bid.length,
-      bid
+      quantity: visible.length
     };
   }
 }
 
-export default ShowBidItemService;
+export default ShowVisibleLotService;

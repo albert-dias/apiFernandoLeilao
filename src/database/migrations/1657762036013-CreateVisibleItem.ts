@@ -17,10 +17,6 @@ export class CreateVisibleItem1657762036013 implements MigrationInterface {
             type: 'uuid'
           },
           {
-            name: 'user_id',
-            type: 'uuid'
-          },
-          {
             name: "created_at",
             type: "timestamp",
             default: "now()",
@@ -28,13 +24,6 @@ export class CreateVisibleItem1657762036013 implements MigrationInterface {
 
         ],
         foreignKeys: [
-          {
-            name: "FKUser_BidsItems",
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            columnNames: ["user_id"],
-            onDelete: "CASCADE",
-          },
           {
             name: "FKLot_BidsItems",
             referencedTableName: "items",
