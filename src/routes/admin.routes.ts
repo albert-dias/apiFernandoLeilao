@@ -20,4 +20,5 @@ admRouter.post("/items", upload.array("images"), adminController.createItems);
 admRouter.post("/categories", adminController.createCategory);
 admRouter.post("/subcategories", adminController.createSubcategory);
 admRouter.get("/request-ability", adminController.listRequestAbility);
+admRouter.get("/request-ability/:id", adminController.listRequestAbilityUser);
 admRouter.put("/request-ability", adminController.updateRequestAbility);

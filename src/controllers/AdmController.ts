@@ -6,6 +6,7 @@ import AdmCreateItemService from "../services/AdmCreateItemService";
 import AdmCreateLotService from "../services/AdmCreateLotService";
 import AdmCreateSubcategoryService from "../services/AdmCreateSubcategoryService";
 import AdmListRequestAbilitesService from "../services/AdmListRequestAbilitesService";
+import AdmListRequestAbilitesUserService from "../services/AdmListRequestAbilitesUserService";
 import AdmLisUsersService from "../services/AdmListUsersService";
 import AdmShowUserService from "../services/AdmShowUserService";
 import AdmUpdateRequestAbilitesService from "../services/AdmUpdateRequestAbilitesService";
@@ -220,6 +221,20 @@ export class AdmController {
       const listService = new AdmListRequestAbilitesService();
 
       const list = await listService.execute({ user_id: id });
+
+      return res.status(201).json(list); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listRequestAbilityUser(req: Request, res: Response): Promise<Response> {
+    const user_id = req.user.id;
+    const { id } = req.params;
+    try {
+      const listService = new AdmListRequestAbilitesUserService();
+
+      const list = await listService.execute({ user_id, id });
 
       return res.status(201).json(list); // retora a conexão
     } catch (error) {
