@@ -32,7 +32,8 @@ class AdmListRequestAbilitesService {
         lot: {
           is_active: "1"
         }
-      }
+      },
+      relations:["lot", "lot.auction"]
     });
 
     const requestInItem = await this.enableItemRepository.find({
@@ -40,8 +41,9 @@ class AdmListRequestAbilitesService {
         status: "0",
         item: {
           is_active: "1"
-        }
-      }
+        },
+      },
+      relations:["item","item.lot","item.lot.auction"]
     })
 
     return {

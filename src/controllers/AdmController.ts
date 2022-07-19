@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AdmAprovedUserService from "../services/AdmAprovedUserService";
 import AdmCreateAuctionService from "../services/AdmCreateAuctionService";
 import AdmCreateCategoryService from "../services/AdmCreateCategoryService";
 import AdmCreateItemService from "../services/AdmCreateItemService";
@@ -245,6 +246,20 @@ export class AdmController {
       const listService = new ListBidsItemService();
 
       const list = await listService.execute();
+
+      return res.status(201).json(list); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async abilityUser(req: Request, res: Response): Promise<Response> {
+    const user_id = req.user.id;
+    const { id, status } = req.body;
+    try {
+      const listService = new AdmAprovedUserService();
+
+      const list = await listService.execute({user_id, id, status});
 
       return res.status(201).json(list); // retora a conexão
     } catch (error) {

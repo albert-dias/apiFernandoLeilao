@@ -37,6 +37,17 @@ class UserRequestAbilitesService {
         throw new Error("Lote nao existe ou foi desativado") 
       }
 
+      const requestExists = await this.enableInLotRepository.find({
+        where: {
+          user_id,
+          lot_id: id
+        }
+      });
+
+      if(requestExists.length>0){
+        throw new Error("Você já fez uma requisição para este Lote")
+      }
+
       const enable = this.enableInLotRepository.create({
         user_id,
         lot_id: id,
@@ -54,6 +65,17 @@ class UserRequestAbilitesService {
 
       if(!itemExists){
         throw new Error("Item nao existe ou foi desativado") 
+      }
+
+      const requestExists = await this.enableItemRepository.find({
+        where: {
+          user_id,
+          item_id: id
+        }
+      });
+
+      if(requestExists.length>0){
+        throw new Error("Você já fez uma requisição para este Item")
       }
 
       const enable = this.enableItemRepository.create({
