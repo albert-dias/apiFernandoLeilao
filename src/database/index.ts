@@ -28,6 +28,7 @@ import { CreateEnableUserInItem1654996074738 } from "./migrations/1654996074738-
 import { CreateVisibleLot1657761989037 } from "./migrations/1657761989037-CreateVisibleLot";
 import { CreateVisibleItem1657762036013 } from "./migrations/1657762036013-CreateVisibleItem";
 import UpdateItem1658279440016 from "./migrations/1658279440016-UpdateItem";
+import { UpdateTitleItem1658328401780 } from "./migrations/1658328401780-UpdateTitleItem";
 
 const dataSource = new DataSource({
     type: "postgres",
@@ -67,6 +68,7 @@ const dataSource = new DataSource({
         CreateVisibleLot1657761989037,
         CreateVisibleItem1657762036013,
         UpdateItem1658279440016,
+        UpdateTitleItem1658328401780,
     ],
 });
 
