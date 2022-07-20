@@ -173,6 +173,9 @@ export class AdmController {
       city,
       subcategory_id,
       destaq,
+      lat,
+      lng,
+      title
     } = req.body
 
     const images = req.files as [];
@@ -204,7 +207,10 @@ export class AdmController {
         state,
         city,
         destaq,
-        is_active: 1
+        is_active: 1,
+        lat,
+        lng,
+        title
       });
 
       const images = await imageService.execute({ images_url, item_id: item.id, user_id: id })
