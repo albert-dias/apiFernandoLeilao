@@ -213,6 +213,27 @@ export class AdmController {
         title
       });
 
+      console.log(id,
+        lot_id,
+        subcategory_id,
+        cod_item,
+        avaliation,
+        description,
+        org_avaliation,
+        initial_bid1,
+        initial_bid2,
+        zipcode,
+        street,
+        number,
+        complement,
+        region,
+        state,
+        city,
+        destaq,
+        lat,
+        lng,
+        title)
+
       const images = await imageService.execute({ images_url, item_id: item.id, user_id: id })
 
       return res.status(201).json({ item, images }); // retora a conexão
