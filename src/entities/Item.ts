@@ -83,6 +83,15 @@ export class Item{
     @Column()
     city: string;
 
+    @Column()
+    lat: string;
+
+    @Column()
+    lng: string;
+
+    @Column()
+    title: string;
+
     @CreateDateColumn()
     created_at: Date;
   

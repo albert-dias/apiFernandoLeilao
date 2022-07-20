@@ -22,7 +22,10 @@ interface IRequest {
   state: string;
   city: string;
   is_active: number;
-  destaq: number
+  destaq: number;
+  lat: string;
+  lng: string;
+  title: string;
 }
 
 class AdmCreateItemService {
@@ -52,7 +55,10 @@ class AdmCreateItemService {
     state,
     city,
     destaq,
-    subcategory_id
+    subcategory_id,
+    lat,
+    lng,
+    title
   }: IRequest): Promise<Item> {
 
     if (!user_id ||
@@ -68,7 +74,10 @@ class AdmCreateItemService {
       !complement ||
       !region ||
       !state ||
-      !city) {
+      !city ||
+      !lat ||
+      !lng ||
+      !title) {
       throw new Error("Dados do item incompletos!")
     }
 
@@ -110,7 +119,10 @@ class AdmCreateItemService {
       state,
       city,
       destaq,
-      is_active: "1"
+      is_active: "1",
+      lat,
+      lng,
+      title,
     });
 
     await this.itemsRepository.save(item);
