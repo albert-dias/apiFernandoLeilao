@@ -10,7 +10,12 @@ class AuctionListService {
   }
   public async execute(): Promise<Auction[]> {
 
-    const auctions = await this.auctionsRepository.find();
+    const auctions = await this.auctionsRepository.find({
+      where:{
+        is_active: 1
+      },
+      relations: ["lots","lots.items", "lots.items.images"]
+    });
 
     return auctions;
   }

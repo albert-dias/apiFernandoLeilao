@@ -10,7 +10,15 @@ class LotListService {
   }
   public async execute(): Promise<Lot[]> {
 
-    const lots = await this.lotsRepository.find();
+    const lots = await this.lotsRepository.find({
+      where: {
+        is_active: "1",
+        auction: {
+          is_active: 1
+        }
+      },
+      relations: ["auction", "items", "items.images"]
+    });
 
     return lots;
   }

@@ -10,7 +10,17 @@ class ItemListService {
   }
   public async execute(): Promise<Item[]> {
 
-    const items = await this.itemsRepository.find({ relations: ["lot","images"] });
+    const items = await this.itemsRepository.find({ 
+      where:{
+        is_active: "1",
+        lot:{
+          is_active: "1",
+          auction: {
+            is_active: 1
+          }
+        }
+      },
+      relations: ["lot","images", "lot.auction"] });
 
     return items;
   }
