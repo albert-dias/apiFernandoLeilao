@@ -71,7 +71,6 @@ class AdmCreateItemService {
       !zipcode ||
       !street ||
       !number ||
-      !complement ||
       !region ||
       !state ||
       !city ||
