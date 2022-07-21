@@ -13,7 +13,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new socketio.Server(httpServer,{
   cors: {
-    origin: ["https://lfrleiloes.com.br/","https://adm.lfrleiloes.com.br/","http://localhost:3000"],
+    origin:false, // ["https://lfrleiloes.com.br/","https://adm.lfrleiloes.com.br/","http://localhost:3000"],
     methods: ["GET", "POST"],
   }
 });
