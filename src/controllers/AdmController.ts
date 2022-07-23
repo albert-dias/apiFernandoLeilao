@@ -9,6 +9,9 @@ import AdmListRequestAbilitesService from "../services/AdmListRequestAbilitesSer
 import AdmListRequestAbilitesUserService from "../services/AdmListRequestAbilitesUserService";
 import AdmLisUsersService from "../services/AdmListUsersService";
 import AdmShowUserService from "../services/AdmShowUserService";
+import AdmUpdateAuctionService from "../services/AdmUpdateAuctionService";
+import AdmUpdateItemService from "../services/AdmUpdateItemService";
+import AdmUpdateLotService from "../services/AdmUpdateLotService";
 import AdmUpdateRequestAbilitesService from "../services/AdmUpdateRequestAbilitesService";
 import ListBidsItemService from "../services/ListBidsItemService";
 import CreateUploadImageService from "../services/UploadImagesService";
@@ -229,6 +232,136 @@ export class AdmController {
       const list = await listService.execute({ user_id: id });
 
       return res.status(201).json(list); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async updateAuction(req: Request, res: Response): Promise<Response> {
+
+    const user_id = req.user.id
+    const { cod_leilao, type_auction, data_realizacao, description, url_edital, id, is_active } = req.body
+    const edital = req.file as IFile;
+
+    try {
+      const auctionService = new AdmUpdateAuctionService();
+
+      const auction = await auctionService.execute({
+        user_id,
+        id,
+        cod_leilao,
+        type_auction,
+        url_edital: edital !== undefined ? edital.location : url_edital,
+        data_realizacao,
+        description,
+        is_active,
+      })
+
+      return res.status(201).json(auction); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async updateLot(req: Request, res: Response): Promise<Response> {
+
+    const user_id = req.user.id
+    const {
+      id,
+      auction_id,
+      cod_lot,
+      description,
+      avaliation,
+      first_open,
+      second_open,
+      close,
+      org_avaliation,
+      initial_bid1,
+      initial_bid2,
+      is_active,
+    } = req.body
+
+    try {
+      const lotService = new AdmUpdateLotService();
+
+      const lot = await lotService.execute({
+        user_id,
+        id,
+        auction_id,
+        cod_lot,
+        description,
+        avaliation,
+        first_open,
+        second_open,
+        close,
+        org_avaliation,
+        initial_bid1,
+        initial_bid2,
+        is_active,
+      })
+
+      return res.status(201).json(lot); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async updateItems(req: Request, res: Response): Promise<Response> {
+
+    const user_id = req.user.id
+    const {
+      id,
+      is_active,
+      lot_id,
+      cod_item,
+      avaliation,
+      description,
+      org_avaliation,
+      initial_bid1,
+      initial_bid2,
+      zipcode,
+      street,
+      number,
+      complement,
+      region,
+      state,
+      city,
+      subcategory_id,
+      destaq,
+      lat,
+      lng,
+      title
+    } = req.body
+
+    try {
+      const itemService = new AdmUpdateItemService();
+
+      const item = await itemService.execute({
+        user_id,
+        id,
+        lot_id,
+        subcategory_id,
+        cod_item,
+        avaliation,
+        description,
+        org_avaliation,
+        initial_bid1,
+        initial_bid2,
+        zipcode,
+        street,
+        number,
+        complement,
+        region,
+        state,
+        city,
+        destaq,
+        lat,
+        lng,
+        title,
+        is_active
+      });
+
+      return res.status(201).json({ item }); // retora a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

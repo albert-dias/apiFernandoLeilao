@@ -5,6 +5,7 @@ import { Lot } from "../entities/Lot";
 import { User } from "../entities/User";
 
 interface IRequest {
+  id: string;
   user_id: string;
   auction_id: string;
   cod_lot: string;
@@ -19,7 +20,7 @@ interface IRequest {
   is_active: number;
 }
 
-class AdmCreateLotService {
+class AdmUpdateLotService {
   private auctionsRepository: Repository<Auction>;
   private lotsRepository: Repository<Lot>;
   private usersRepository: Repository<User>;
@@ -30,6 +31,7 @@ class AdmCreateLotService {
     this.usersRepository = dataSource.getRepository(User);
   }
   public async execute({ 
+    id,
     user_id, 
     auction_id,
     cod_lot,
@@ -44,7 +46,9 @@ class AdmCreateLotService {
     is_active 
   }: IRequest): Promise<Lot> {
 
-    if (!user_id || 
+    if (
+      !id ||
+      !user_id || 
       !auction_id || 
       !cod_lot || 
       !first_open ||
@@ -73,27 +77,31 @@ class AdmCreateLotService {
 
     if(!auctionExists){
       throw new Error("Leilão não encontrado!");
-      
     }
 
-    const lot =  this.lotsRepository.create({
-      auction_id,
-      cod_lot,
-      description,
-      avaliation,
-      first_open,
-      second_open,
-      close,
-      org_avaliation,
-      initial_bid1,
-      initial_bid2,
-      is_active: "1"
-    });
+    const lotExists = await this.lotsRepository.findOneBy({id});
 
-    await this.lotsRepository.save(lot);
+    if(!lotExists){
+      throw new Error("Lote não encontrado!");
+    }
+
+    lotExists.id = id,
+    lotExists.auction_id = auction_id,
+    lotExists.cod_lot = cod_lot,
+    lotExists.description = description,
+    lotExists.avaliation = avaliation,
+    lotExists.first_open = first_open,
+    lotExists.second_open = second_open,
+    lotExists.close = close,
+    lotExists.org_avaliation = org_avaliation,
+    lotExists.initial_bid1 = initial_bid1,
+    lotExists.initial_bid2 = initial_bid2,
+    lotExists.is_active = `${is_active}` 
+
+    await this.lotsRepository.save(lotExists);
     
-    return lot;
+    return lotExists;
   }
 }
 
-export default AdmCreateLotService;
+export default AdmUpdateLotService;
