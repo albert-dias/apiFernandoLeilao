@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { MoreThanOrEqual, Repository } from "typeorm";
 import dataSource from "../database";
 import { Item } from "../entities/Item";
 
@@ -15,6 +15,7 @@ class ItemListService {
         is_active: "1",
         lot:{
           is_active: "1",
+          close: MoreThanOrEqual(new Date()), 
           auction: {
             is_active: 1
           }

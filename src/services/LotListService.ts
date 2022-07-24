@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { MoreThanOrEqual, Repository } from "typeorm";
 import dataSource from "../database";
 import { Lot } from "../entities/Lot";
 
@@ -13,6 +13,7 @@ class LotListService {
     const lots = await this.lotsRepository.find({
       where: {
         is_active: "1",
+        close: MoreThanOrEqual(new Date()),
         auction: {
           is_active: 1
         }
