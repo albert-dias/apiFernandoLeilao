@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Auction } from "./Auction";
+import { BidLot } from "./BidLot";
 import { Item } from "./Item";
 import { User } from "./User";
 
@@ -48,7 +49,11 @@ export class Lot{
     initial_bid2?: string;
 
     @Column()       
-    win_bid: string;
+    win_bid_id: string;
+
+    @JoinColumn({ name: "win_bid_id" })
+    @ManyToOne(() => BidLot)     
+    win_bid: BidLot;
 
     @Column()       
     user_win_id: string;

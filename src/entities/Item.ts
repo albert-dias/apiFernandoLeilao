@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { BidItem } from "./BidItem";
 import { Image } from "./Image";
 import { Lot } from "./Lot";
 import { Subcategory } from "./Subcategory";
@@ -50,7 +51,11 @@ export class Item{
     initial_bid2?: string;
 
     @Column()       
-    win_bid: string;
+    win_bid_id: string;
+
+    @JoinColumn({ name: "win_bid_id" })
+    @ManyToOne(() => BidItem)     
+    win_bid: BidItem;
 
     @Column()       
     user_win_id: string;

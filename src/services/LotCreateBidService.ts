@@ -37,6 +37,11 @@ class LotCreateBidService {
 
     await this.lotBidRepository.save(bid)
 
+    itemExists.user_win_id = user_id;
+    itemExists.win_bid_id = bid.id
+
+    await this.lotRepository.save(itemExists);
+
     return bid;
   }
 }

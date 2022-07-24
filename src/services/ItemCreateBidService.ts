@@ -35,7 +35,12 @@ class ItemCreateBidService {
       item_id
     })
 
-    await this.itemsBidRepository.save(bid)
+    await this.itemsBidRepository.save(bid);
+
+    itemExists.user_win_id = user_id;
+    itemExists.win_bid_id = bid.id
+
+    await this.itemsRepository.save(itemExists);
 
     return bid;
   }
