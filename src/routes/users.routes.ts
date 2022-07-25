@@ -15,3 +15,4 @@ usersRouter.post("/", upload.array("documents"), usersController.create);
 usersRouter.get("/me", ensureAuthenticate, usersController.show)
 usersRouter.get("/get-abilities", ensureAuthenticate, usersController.checkAbility);
 usersRouter.post("/ability", ensureAuthenticate, usersController.createAbility);
+usersRouter.post("/news", usersController.assingNew);

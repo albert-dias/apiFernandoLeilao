@@ -9,6 +9,7 @@ import { EnableInLot } from "../entities/EnableInLot";
 import { Image } from "../entities/Image";
 import { Item } from "../entities/Item";
 import { Lot } from "../entities/Lot";
+import { NewsLetter } from "../entities/NewsLetter";
 import { Subcategory } from "../entities/Subcategory";
 import { User } from "../entities/User";
 import { VisibleItem } from "../entities/VisibleItem";
@@ -31,6 +32,7 @@ import UpdateItem1658279440016 from "./migrations/1658279440016-UpdateItem";
 import { UpdateTitleItem1658328401780 } from "./migrations/1658328401780-UpdateTitleItem";
 import { BidWinIdInLot1658662347062 } from "./migrations/1658662347062-BidWinIdInLot";
 import { BidWinIdInItem1658662376477 } from "./migrations/1658662376477-BidWinIdInItem";
+import { CreateNewsLetter1658703567225 } from "./migrations/1658703567225-CreateNewsLetter";
 
 const dataSource = new DataSource({
     type: "postgres",
@@ -52,7 +54,8 @@ const dataSource = new DataSource({
         Subcategory,
         User,
         VisibleLot,
-        VisibleItem
+        VisibleItem,
+        NewsLetter
     ],
     migrations: [
         CreateUser1654995449661,
@@ -73,6 +76,7 @@ const dataSource = new DataSource({
         UpdateTitleItem1658328401780,
         BidWinIdInItem1658662376477,
         BidWinIdInLot1658662347062,
+        CreateNewsLetter1658703567225,
     ],
 });
 

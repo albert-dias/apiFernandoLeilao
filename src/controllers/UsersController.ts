@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AssignNewsLetterService from "../services/AssignNewsLetterService";
 import CreateUserService from "../services/CreateUserService";
 import ShowMyUserService from "../services/ShowMyUserService";
 import CreateUploadService from "../services/UploadDocService";
@@ -119,6 +120,18 @@ export class UsersController {
     try {
 
       return res.status(201).json(); // retora a conexão
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async assingNew(req: Request, res: Response): Promise<Response>{
+    try {
+      const {mail} = req.body;
+      const newsService = new AssignNewsLetterService()
+
+      const news = await newsService.execute( {mail} )
+      return res.status(201).json(news); // retora a conexão
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
