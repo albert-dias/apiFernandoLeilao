@@ -12,13 +12,8 @@ class AuctionListService {
 
     const auctions = await this.auctionsRepository.find({
       where:{
-        is_active: 1,
-        lots:{
-          is_active: "1",
-          close: MoreThanOrEqual(new Date()),
-        }        
+        is_active: 1,  
       },
-      relations: ["lots","lots.items", "lots.items.images"]
     });
 
     return auctions;
