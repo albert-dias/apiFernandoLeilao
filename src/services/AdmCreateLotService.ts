@@ -76,14 +76,20 @@ class AdmCreateLotService {
       
     }
 
+    // const tratF = new Date(first_open).setHours(new Date(first_open).getHours() + 3);
+    // const tratS = new Date(second_open).setHours(new Date(second_open).getHours() + 3);
+    // const tratC = new Date(close).setHours(new Date(close).getHours() + 3);
+
+    // console.log(tratF, tratS, tratC)
+
     const lot =  this.lotsRepository.create({
       auction_id,
       cod_lot,
       description,
       avaliation,
-      first_open,
-      second_open,
-      close,
+      first_open: new Date(first_open),
+      second_open: new Date(close),
+      close: new Date(close),
       org_avaliation,
       initial_bid1,
       initial_bid2,
