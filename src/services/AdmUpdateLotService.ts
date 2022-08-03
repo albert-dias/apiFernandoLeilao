@@ -89,13 +89,13 @@ class AdmUpdateLotService {
     lotExists.auction_id = auction_id,
     lotExists.cod_lot = cod_lot,
     lotExists.description = description,
-    lotExists.avaliation = avaliation,
-    lotExists.first_open = first_open,
-    lotExists.second_open = second_open,
-    lotExists.close = close,
+    lotExists.avaliation = avaliation.replace('.','').replace(',','.'),
+    lotExists.first_open = new Date(first_open),
+    lotExists.second_open = new Date(second_open),
+    lotExists.close = new Date(close),
     lotExists.org_avaliation = org_avaliation,
-    lotExists.initial_bid1 = initial_bid1,
-    lotExists.initial_bid2 = initial_bid2,
+    lotExists.initial_bid1 = initial_bid1.replace('.','').replace(',','.'),
+    lotExists.initial_bid2 = initial_bid2.replace('.','').replace(',','.'),
     lotExists.is_active = `${is_active}` 
 
     await this.lotsRepository.save(lotExists);

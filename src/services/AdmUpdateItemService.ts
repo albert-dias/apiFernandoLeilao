@@ -114,11 +114,11 @@ class AdmUpdateItemService {
       itemExists.lot_id = lot_id;
       itemExists.subcategory_id = subcategory_id;
       itemExists.cod_item = cod_item;
-      itemExists.avaliation = avaliation;
+      itemExists.avaliation = avaliation.replace('.','').replace(',','.');
       itemExists.description = description;
       itemExists.org_avaliation = org_avaliation;
-      itemExists.initial_bid1 = initial_bid1;
-      itemExists.initial_bid2 = initial_bid2;
+      itemExists.initial_bid1 = initial_bid1.replace('.','').replace(',','.');
+      itemExists.initial_bid2 = initial_bid2.replace('.','').replace(',','.');
       itemExists.zipcode = zipcode;
       itemExists.street = street;
       itemExists.number = number;
