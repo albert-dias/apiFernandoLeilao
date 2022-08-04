@@ -29,7 +29,7 @@ class ShowBidItemService {
       where: {
         item_id: id
       },
-      relations:['user'],
+      relations:['user', 'item', 'item.lot'],
       order: {
         created_at: "DESC"
       }

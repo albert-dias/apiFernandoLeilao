@@ -9,6 +9,7 @@ import CreateVisibleLotService from './services/CreateVisibleLotService';
 import ShowVisibleItemService from './services/ShowVisibleItemService';
 import ShowBidLotService from './services/ShowBidLotService';
 import ShowVisibleLotService from './services/ShowVisibleLotService';
+import UpdateItemCloseService from './services/UpdateItemCloseService';
 const app = express();
 const httpServer = createServer(app);
 const io = new socketio.Server(httpServer,{
@@ -70,6 +71,15 @@ io.sockets.on('connection', function (socket) {
       io.sockets.emit("lot_visible", visible)
     })
 
+    socket.on("start_count", function(data: Props){
+      io.sockets.emit("start_count")
+    })
+
+    socket.on("stop_count", async function(data: Props){
+      const updateClose = new UpdateItemCloseService();
+      await updateClose.execute({id:data.id})
+      io.sockets.emit("stop_count")
+    })
 });
 
 

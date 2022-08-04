@@ -113,6 +113,7 @@ class AdmCreateItemService {
       zipcode,
       street,
       number,
+      close: lotExists.close,
       complement,
       region,
       state,

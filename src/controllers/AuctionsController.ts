@@ -6,10 +6,13 @@ import CategoryListService from "../services/CategoryListService";
 import ItemCreateBidService from "../services/ItemCreateBidService";
 import ItemListService from "../services/ItemListService";
 import ItemShowService from "../services/ItemShowService";
+import ItemsLotListService from "../services/ItemsLotListService";
 import LotCreateBidService from "../services/LotCreateBidService";
 import LotListService from "../services/LotListService";
+import LotsAuctionListService from "../services/LotsAuctionListService";
 import LotShowService from "../services/LotShowService";
 import SubcategoryListService from "../services/SubCategoryListService";
+import UpdateItemCloseService from "../services/UpdateItemCloseService";
 
 interface IFile extends Express.Multer.File {
   key: string;
@@ -46,6 +49,32 @@ export class AuctionsController {
       const itemService = new ItemListService();
 
       const items = await itemService.execute()
+
+      return res.status(200).json(items); 
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listLotsAuction(req: Request, res: Response): Promise<Response> {
+    const { auction_id } = req.params;
+    try {
+      const lotService = new LotsAuctionListService();
+
+      const lots = await lotService.execute({auction_id})
+
+      return res.status(200).json(lots); 
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listItemsLot(req: Request, res: Response): Promise<Response> {
+    const { lot_id } = req.params;
+    try {
+      const itemService = new ItemsLotListService();
+
+      const items = await itemService.execute({lot_id})
 
       return res.status(200).json(items); 
     } catch (error) {
@@ -146,6 +175,5 @@ export class AuctionsController {
       return res.status(400).json({ message: error.message });
     }
   }
-
 
 }

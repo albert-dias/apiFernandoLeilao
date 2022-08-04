@@ -58,6 +58,9 @@ export class Item{
     win_bid: BidItem;
 
     @Column()       
+    close: Date;
+    
+    @Column()       
     user_win_id: string;
 
     @JoinColumn({ name: "user_win_id" })
