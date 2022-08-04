@@ -72,7 +72,7 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on("start_count", function(data: Props){
-      io.sockets.emit("start_count")
+      io.sockets.emit("start_count", data)
     })
 
     socket.on("stop_count", async function(data: Props){
