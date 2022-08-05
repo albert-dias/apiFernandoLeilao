@@ -18,6 +18,7 @@ class ItemsLotListService {
           close: MoreThanOrEqual(new Date()),
         }
       },
+      relations:["images"]
     });
 
     return items;
