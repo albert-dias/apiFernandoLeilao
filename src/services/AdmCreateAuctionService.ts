@@ -8,6 +8,9 @@ interface IRequest {
   cod_leilao: string;
   type_auction: string;
   url_edital: string;
+  matricula_url?: string;
+  process_url?: string;
+  other_url?: string;
   data_realizacao: string;
   description: string;
   is_active: number;
@@ -21,23 +24,26 @@ class AdmCreateAuctionService {
     this.auctionsRepository = dataSource.getRepository(Auction);
     this.usersRepository = dataSource.getRepository(User);
   }
-  public async execute({ 
-    user_id, 
+  public async execute({
+    user_id,
     cod_leilao,
     type_auction,
     url_edital,
     data_realizacao,
     description,
-    is_active 
+    is_active,
+    matricula_url,
+    process_url,
+    other_url
   }: IRequest): Promise<Auction> {
 
-    if (!user_id || 
-      !cod_leilao || 
-      !type_auction || 
+    if (!user_id ||
+      !cod_leilao ||
+      !type_auction ||
       !url_edital ||
       !data_realizacao ||
       !description ||
-      !is_active ) {
+      !is_active) {
       throw new Error("Dados incompletos!")
     }
 
@@ -48,21 +54,24 @@ class AdmCreateAuctionService {
       },
     });
 
-    if(!user){
+    if (!user) {
       throw new Error("Usuário não é administrador!")
     }
 
-    const auction =  this.auctionsRepository.create({
+    const auction = this.auctionsRepository.create({
       cod_leilao,
       type_auction,
       url_edital,
+      matricula_url,
+      process_url,
+      other_url,
       data_realizacao,
       description,
       is_active
     });
 
     await this.auctionsRepository.save(auction);
-    
+
     return auction;
   }
 }

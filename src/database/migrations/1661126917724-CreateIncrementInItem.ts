@@ -6,7 +6,7 @@ export class CreateIncrementInItem1661126917724 implements MigrationInterface {
     await queryRunner.addColumn("items",
       new TableColumn({
         name: 'increment',
-        type: 'integer',
+        type: 'varchar',
         isNullable: true,
       })
     )

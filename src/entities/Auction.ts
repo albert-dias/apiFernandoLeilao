@@ -19,6 +19,15 @@ export class Auction{
                     
     @Column()       
     url_edital: string;
+    
+    @Column()       
+    matricula_url: string;
+
+    @Column()       
+    process_url: string;
+
+    @Column()       
+    other_url: string;
                     
     @Column()       
     data_realizacao: string;

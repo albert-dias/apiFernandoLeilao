@@ -26,7 +26,7 @@ interface IRequest {
   lat: string;
   lng: string;
   title: string;
-  increment: number;
+  increment: string;
 }
 
 class AdmCreateItemService {
@@ -62,6 +62,28 @@ class AdmCreateItemService {
     title,
     increment
   }: IRequest): Promise<Item> {
+
+    console.log(user_id,
+    lot_id,
+    cod_item,
+    avaliation,
+    description,
+    org_avaliation,
+    initial_bid1,
+    initial_bid2,
+    zipcode,
+    street,
+    number,
+    complement,
+    region,
+    state,
+    city,
+    destaq,
+    subcategory_id,
+    lat,
+    lng,
+    title,
+    increment)
 
     if (!user_id ||
       !lot_id ||

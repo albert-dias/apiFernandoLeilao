@@ -101,7 +101,7 @@ export class Item{
     title: string;
 
     @Column()
-    increment?: number;
+    increment?: string;
 
     @CreateDateColumn()
     created_at: Date;

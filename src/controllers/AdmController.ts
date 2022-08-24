@@ -21,6 +21,13 @@ interface IFile extends Express.Multer.File {
   location: string;
 }
 
+interface IPropsFiles {
+  edital: IFile[];
+  matricula: IFile[];
+  process: IFile[];
+  other: IFile[];
+}
+
 export class AdmController {
   async listUsers(req: Request, res: Response): Promise<Response> {
 
@@ -95,7 +102,17 @@ export class AdmController {
 
     const { id } = req.user
     const { cod_leilao, type_auction, data_realizacao, description } = req.body
-    const edital = req.file as IFile;
+    const files = req.files;
+
+   console.log(files)
+
+    const edital:IFile = files["edital"][0];
+    
+    const matricula:IFile = files["matricula"][0];
+
+    const process:IFile = files["process"][0];
+
+    const other:IFile = files["outros"][0];
 
     try {
       const auctionService = new AdmCreateAuctionService();
@@ -105,6 +122,9 @@ export class AdmController {
         cod_leilao,
         type_auction,
         url_edital: edital.location,
+        matricula_url: matricula.location,
+        process_url: process.location, 
+        other_url: other.location,
         data_realizacao,
         description,
         is_active: 1
@@ -178,12 +198,12 @@ export class AdmController {
       destaq,
       lat,
       lng,
-      title, increment
-    } = req.body
+      title, 
+      increment
+    } = req.body;
 
     const images = req.files as [];
 
-    console.log(images)
     const images_url = images.map((document: IFile) => {
       return document.location;
     });
@@ -214,7 +234,7 @@ export class AdmController {
         lat,
         lng,
         title, 
-        increment: Number(increment)
+        increment
       });
 
       const images = await imageService.execute({ images_url, item_id: item.id, user_id: id })
