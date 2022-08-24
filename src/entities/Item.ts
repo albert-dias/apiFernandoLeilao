@@ -100,6 +100,9 @@ export class Item{
     @Column()
     title: string;
 
+    @Column()
+    increment?: number;
+
     @CreateDateColumn()
     created_at: Date;
   

@@ -34,6 +34,8 @@ import { BidWinIdInLot1658662347062 } from "./migrations/1658662347062-BidWinIdI
 import { BidWinIdInItem1658662376477 } from "./migrations/1658662376477-BidWinIdInItem";
 import { CreateNewsLetter1658703567225 } from "./migrations/1658703567225-CreateNewsLetter";
 import { CreateCloseInItem1659650203644 } from "./migrations/1659650203644-CreateCloseInItem";
+import { CreateIncrementInItem1661126917724 } from "./migrations/1661126917724-CreateIncrementInItem";
+import { CreateOthersDocsInAuction1661300774976 } from "./migrations/1661300774976-CreateOthersDocsInAuction";
 
 const dataSource = new DataSource({
     type: "postgres",
@@ -79,6 +81,8 @@ const dataSource = new DataSource({
         BidWinIdInLot1658662347062,
         CreateNewsLetter1658703567225,
         CreateCloseInItem1659650203644,
+        CreateIncrementInItem1661126917724,
+        CreateOthersDocsInAuction1661300774976,
     ],
 });
 

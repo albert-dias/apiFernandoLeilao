@@ -26,6 +26,7 @@ interface IRequest {
   lat: string;
   lng: string;
   title: string;
+  increment: number;
 }
 
 class AdmCreateItemService {
@@ -58,7 +59,8 @@ class AdmCreateItemService {
     subcategory_id,
     lat,
     lng,
-    title
+    title,
+    increment
   }: IRequest): Promise<Item> {
 
     if (!user_id ||
@@ -76,7 +78,8 @@ class AdmCreateItemService {
       !city ||
       !lat ||
       !lng ||
-      !title) {
+      !title ||
+      !increment) {
       throw new Error("Dados do item incompletos!")
     }
 
@@ -123,6 +126,7 @@ class AdmCreateItemService {
       lat,
       lng,
       title,
+      increment
     });
 
     await this.itemsRepository.save(item);

@@ -178,7 +178,7 @@ export class AdmController {
       destaq,
       lat,
       lng,
-      title
+      title, increment
     } = req.body
 
     const images = req.files as [];
@@ -213,7 +213,8 @@ export class AdmController {
         is_active: 1,
         lat,
         lng,
-        title
+        title, 
+        increment: Number(increment)
       });
 
       const images = await imageService.execute({ images_url, item_id: item.id, user_id: id })
