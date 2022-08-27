@@ -13,9 +13,9 @@ class ItemListService {
     const items = await this.itemsRepository.find({ 
       where:{
         is_active: "1",
+        close: MoreThanOrEqual(new Date()),
         lot:{
           is_active: "1",
-          close: MoreThanOrEqual(new Date()), 
           auction: {
             is_active: 1
           }
