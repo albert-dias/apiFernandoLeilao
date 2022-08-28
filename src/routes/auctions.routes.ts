@@ -16,6 +16,7 @@ auctionRouter.get("/subcategories", auctionController.listSubcategories);
 auctionRouter.get("/categories", auctionController.listCategories);
 auctionRouter.get("/lots", auctionController.listLots);
 auctionRouter.get("/items", auctionController.listItems);
+auctionRouter.get("/old", auctionController.listOldItems);
 auctionRouter.get("/lots/:auction_id", auctionController.listLotsAuction);
 auctionRouter.get("/items/:lot_id", auctionController.listItemsLot);
 auctionRouter.get("/:id", auctionController.showAuction);

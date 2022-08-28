@@ -5,6 +5,7 @@ import AuctionShowService from "../services/AuctionShowService";
 import CategoryListService from "../services/CategoryListService";
 import ItemCreateBidService from "../services/ItemCreateBidService";
 import ItemListService from "../services/ItemListService";
+import ItemOldListService from "../services/ItemOldListService";
 import ItemShowService from "../services/ItemShowService";
 import ItemsLotListService from "../services/ItemsLotListService";
 import LotCreateBidService from "../services/LotCreateBidService";
@@ -47,6 +48,18 @@ export class AuctionsController {
   async listItems(req: Request, res: Response): Promise<Response> {
     try {
       const itemService = new ItemListService();
+
+      const items = await itemService.execute()
+
+      return res.status(200).json(items); 
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async listOldItems(req: Request, res: Response): Promise<Response> {
+    try {
+      const itemService = new ItemOldListService();
 
       const items = await itemService.execute()
 
