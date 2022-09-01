@@ -104,15 +104,16 @@ export class AdmController {
     const { cod_leilao, type_auction, data_realizacao, description } = req.body
     const files = req.files;
 
-   console.log(files)
-
-    const edital:IFile = files["edital"][0];
     
-    const matricula:IFile = files["matricula"][0];
-
-    const process:IFile = files["process"][0];
-
-    const other:IFile = files["outros"][0];
+    const edital:IFile[] = files["edital"];
+    
+    const matricula:IFile[] = files["matricula"];
+    
+    const process:IFile[] = files["process"];
+    
+    const other:IFile[] = files["outros"];
+    
+    console.log(edital[0], matricula, process, other)
 
     try {
       const auctionService = new AdmCreateAuctionService();
@@ -121,10 +122,10 @@ export class AdmController {
         user_id: id,
         cod_leilao,
         type_auction,
-        url_edital: edital.location,
-        matricula_url: matricula.location,
-        process_url: process.location, 
-        other_url: other.location,
+        url_edital: edital[0].location,
+        matricula_url: matricula !== undefined ? matricula[0].location : '',
+        process_url: process!== undefined ? process[0].location : '', 
+        other_url: other!== undefined ?other[0].location : '',
         data_realizacao,
         description,
         is_active: 1
